@@ -26,18 +26,18 @@ void threadFunction(int threadId, int delay){
 	cout << "Ending thread: " << threadId << endl;
 }
 
-int main(void){
+int main(void) {
 	cout << "I am a Writer" << endl;
 	char choice;
 	int threadId = 0;
 	//the maximum amount of time waiting out of all threads
 	int maxDelay = 0;
 
-	while(true){
-		cout<<"Would you like to create a writer thread? (y/n)"<< endl;
+	while (true) {
+		cout << "Would you like to create a writer thread? (y/n)" << endl;
 		cin >> choice;
 
-		if(choice == 'n'){
+		if (choice == 'n') {
 			cout << "Will now end program once all threads have ended." << endl;
 			running = false;
 			//wait for longer than needed to ensure all threads close
@@ -48,12 +48,13 @@ int main(void){
 		int delay;
 		cout << "Enter delay time for the new thread. Please enter an Integer: " << endl;
 		cin >> delay;
-		if(delay > maxDelay){
+		if (delay > maxDelay) {
 
 			maxDelay = delay;
 		}
-		thread t1(threadFunction,threadId,delay);
+		thread t1(threadFunction, threadId, delay);
 		threadId++;
 		t1.detach();
 	}
-	cout<< "Program ending now" << endl;
+	cout << "Program ending now" << endl;
+}

@@ -9,11 +9,9 @@
 
 Shared<int[3]> sharedObject("share", true);
 bool running = true;
-//creating semaphores
-//protect access to data within the shared object
-Semaphore protect("protect", 1, true);
-//linker is used for communication between the Reader and Writer. Writter tells the reader okay I'm done, you can read now.
-Semaphore DataModified("DataModified", 0, true);
+Semaphore protect("protect", 1, true);//protect access to data within the shared object
+//dataReady is used for communication between the Reader and Writer. Writter tells the reader okay I'm done, you can read now.
+Semaphore dataReady("dataReady", 0, true);
 
 void T1Function(int threadId, int delay)
 {
@@ -28,7 +26,7 @@ void T1Function(int threadId, int delay)
 		*memory[2] = delay;
 		numberCalled++;
 		protect.Signal(); //leaving the critical area, data has been modified.
-		DataModified.Signal();
+		dataReady.Signal();
 		sleep(delay);
 
 	}
