@@ -10,9 +10,8 @@ int main(void)
 	auto memory = sharedObject.get();//pointer to the object
 	while(true)
 	{
-	
 		//Wait until there is something for the Reader to read
-		linker.Wait();
+		dataReady.Wait();
 		std::cout << *memory[0] << " " << *memory[1] << " " << *memory[2] << std::endl;
 	}
 }
